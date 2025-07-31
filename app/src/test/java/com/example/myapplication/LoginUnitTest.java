@@ -12,9 +12,11 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.CoreMatchers.*;
 
 @RunWith(MockitoJUnitRunner.class)
-public class LoginUnitTest {
+public class
+LoginUnitTest {
 
     private static final String FAKE_STRING = "Login was successful";
+    private static final String VALID_EMAIL = "Valid Username";
 
     @Mock
     Context mMockContext;
@@ -30,4 +32,31 @@ public class LoginUnitTest {
         // ...then the result should be the expected one.
         assertThat(result, is(FAKE_STRING));
     }
+
+    @Test
+    public void testValidEmail() {
+
+        LoginActivity myObjectUnderTest = new LoginActivity(mMockContext);
+
+        // ...when the string is returned from the object under test...
+        String result = myObjectUnderTest.validate_email("admin@gmail.com");
+
+        // ...then the result should be the expected one.
+        assertThat(result, is(VALID_EMAIL));
+    }
+
+    @Test
+    public void testInvalidEmail() {
+
+        LoginActivity myObjectUnderTest = new LoginActivity(mMockContext);
+
+        // ...when the string is returned from the object under test...
+        String result = myObjectUnderTest.validate_email("admingmail.com");
+
+        // ...then the result should be the expected one.
+        assertThat(result, is(VALID_EMAIL));
+    }
+
+
+
 }
